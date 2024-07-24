@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <title>TV App</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #1a1a1a;
+            color: #ffffff;
+            overflow: hidden;
+        }
+        .navbar {
+            background-color: #000;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            padding: 0 20px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+        }
+        .navbar.light {
+            background-color: #f0f0f0; /* Light theme background color */
+            color: #000000; /* Light theme text color */
+        }
+        .navbar .menu-btn {
+            font-size: 24px;
+            cursor: pointer;
+        }
+        .sidebar {
+            height: 100%;
+            width: 0;
+            position: fixed;
+            z-index: 1001;
+            top: 0;
+            left: 0;
+            background-color: #000;
+            overflow-x: hidden;
+            transition: width 0.5s;
+            padding-top: 60px;
+        }
+        .sidebar a {
+            padding: 10px 15px;
+            text-decoration: none;
+            font-size: 1.2em;
+            color: #ffffff;
+            display: block;
+            transition: 0.3s;
+        }
+        .sidebar a:hover {
+            background-color: #00bfff;
+            color: #000;
+        }
+        .sidebar .close-btn {
+            position: absolute;
+            top: 20px;
+            right: 25px;
+            font-size: 36px;
+            margin-left: 50px;
+            color: #ffffff;
+            cursor: pointer;
+        }
+        .container {
+            margin-top: 50px;
+            padding: 20px;
+            width: 100%;
+            height: calc(100vh - 50px);
+            background: linear-gradient(135deg, #00bfff 0%, #1a1a1a 100%);
+            box-shadow: inset 0 0 50px rgba(0, 0, 0, 0.3);
+            overflow-y: auto;
+            text-align: center;
+        }
+        .page {
+            display: none;
+        }
+        .active {
+            display: block;
+            opacity: 1;
+        }
+        h1 {
+            font-size: 2.5em;
+            margin-bottom: 20px;
+            color: #00bfff;
+        }
+        p {
+            font-size: 1.2em;
+            line-height: 1.6em;
+        }
+        .channel {
+            margin-bottom: 20px;
+        }
+        .channel button {
+            background-color: #00bfff;
+            border: none;
+            color: #000;
+            padding: 10px 20px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 1em;
+            margin: 10px 0;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        .channel button:hover {
+            background-color: #009acd;
+        }
+        /* Light theme styles */
+        body.light {
+            background-color: #f0f0f0; /* Light theme background color */
+            color: #000000; /* Light theme text color */
+        }
+        .container.light {
+            background: linear-gradient(135deg, #1a1a1a 0%, #f0f0f0 100%);
+            color: #000000; /* Light theme text color */
+        }
+        /* Music section styles */
+        #music {
+            display: none;
+            padding: 20px;
+        }
+
+        #music.active {
+            display: block;
+            opacity: 1;
+        }
+
+        #audioPlayer {
+            width: 100%;
+            margin-top: 20px;
+        }
+
+        #timer {
+            margin-top: 10px;
+            font-size: 1.2em;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="navbar" id="navbar">
+        <span class="menu-btn" onclick="toggleNav()">&#9776;</span>
+        <span style="margin-left: 10px;">TV App</span>
+    </div>
+
+    <div id="sidebar" class="sidebar">
+        <a href="javascript:void(0)" class="close-btn" onclick="toggleNav()">&times;</a>
+        <a href="#home" onclick="showPage('home')">Home</a>
+        <a href="#football" onclick="showPage('football')">Watch Live Football</a>
+        <a href="#cricket" onclick="showPage('cricket')">Watch Live Cricket</a>
+        <a href="#football-scoreboard" onclick="showPage('football-scoreboard')">Football Scoreboard</a>
+        <a href="#cricket-scoreboard" onclick="showPage('cricket-scoreboard')">Cricket Scoreboard</a>
+        <a href="#settings" onclick="showPage('settings')">Settings</a>
+      
+    </div>
+
+    <div class="container" id="main-container">
+        <div id="home" class="page active">
+            <h1>Welcome to the TV App</h1>
+            <p>This is the home page.<br> Enjoy your favorite content!</p>
+        </div>
+
+        <div id="football" class="page">
+            <h1>Watch Live Football</h1>
+            <div class="channel">
+                <h2>TNT Sports 2</h2>
+                <button onclick="window.open('tnt-sports-2.html', '_blank')">Watch</button>
+            </div>
+            <!-- Other football channels -->
+          <div class="channel">
+                <h2>Sky Sports Premier League</h2>
+                <button onclick="window.open('sky-sports-premier-league.html', '_blank')">Watch</button>
+            </div>
+            <div class="channel">
+                <h2>Sky Sports Football (Bundesliga)</h2>
+                <button onclick="window.open('sky-sports-football.html', '_blank')">Watch</button>
+            </div>
+            <div class="channel">
+                <h2>Viaplay Sports 1 (La Liga)</h2>
+                <button onclick="window.open('viaplay-sports-1.html', '_blank')">Watch</button>
+            </div>
+            <div class="channel">
+                <h2>TNT Sports 1</h2>
+                <button onclick="window.open('tnt-sports-1.html', '_blank')">Watch</button>
+            </div>
+        </div>
+
+        <div id="cricket" class="page">
+            <h1>Watch Live Cricket</h1>
+            <div class="channel">
+                <h2>Channel 20 (Low Quality)</h2>
+                <button onclick="window.open('channel-20.html', '_blank')">Watch</button>
+            </div>
+            <!-- Other cricket channels -->
+          <div class="channel">
+                <h2>Willow Cricket HD</h2>
+                <button onclick="window.open('willow-cricket-hd.html', '_blank')">Watch</button>
+            </div>
+            <div class="channel">
+                <h2>SuperSport Cricket HD</h2>
+                <button onclick="window.open('supersport-cricket-hd.html', '_blank')">Watch</button>
+            </div>
+            <div class="channel">
+                <h2>Fox Cricket 501 HD</h2>
+                <button onclick="window.open('fox-cricket-501-hd.html', '_blank')">Watch</button>
+            </div>
+            <div class="channel">
+                <h2>A Sports HD</h2>
+                <button onclick="window.open('a-sports-hd.html', '_blank')">Watch</button>
+            </div>
+            <div class="channel">
+                <h2>Star Sports LIVE</h2>
+                <button onclick="window.open('star-sports-live.html', '_blank')">Watch</button>
+            </div>
+            <div class="channel">
+                <h2>PTV Sports LIVE</h2>     
+              <button onclick="window.open('ptv-sports-live.html', '_blank')">Watch</button>
+            </div>
+            <div class="channel">
+                <h2>Sky Sports Cricket LIVE</h2>
+                <button onclick="window.open('sky-sports-cricket-live.html', '_blank')">Watch</button>
+            </div>
+        </div>
+
+        <div id="football-scoreboard" class="page">
+            <h1>Football Scoreboard</h1>
+            <p>Display live football scores and updates here.</p>
+        </div>
+
+        <div id="cricket-scoreboard" class="page">
+            <h1>Cricket Scoreboard</h1>
+            <p>Display live cricket scores and updates here.</p>
+        </div>
+
+        <div id="settings" class="page">
+            <h1>Settings</h1>
+            <p>Choose your preferred theme:</p>
+            <button onclick="setTheme('dark')">Dark Theme</button>
+            <button onclick="setTheme('light')">Light Theme</button>
+            <p id="themeStatus"></p>
+        </div>
+      
+    </div>
+
+    <script>
+        function toggleNav() {
+            var sidebar = document.getElementById("sidebar");
+            if (sidebar.style.width === "250px") {
+                closeNav();
+            } else {
+                openNav();
+            }
+        }
+
+        function openNav() {
+            document.getElementById("sidebar").style.width = "250px";
+        }
+
+        function closeNav() {
+            document.getElementById("sidebar").style.width = "0";
+        }
+
+        function showPage(pageId) {
+            var pages = document.querySelectorAll('.page');
+            pages.forEach(function(page) {
+                if (page.id === pageId) {
+                    page.classList.add('active');
+                } else {
+                    page.classList.remove('active');
+                }
+            });
+            closeNav();  // Close the sidebar after selecting a page
+        }
+
+        function setTheme(theme) {
+            var body = document.body;
+            var navbar = document.getElementById("navbar");
+            var container = document.getElementById("main-container");
+
+            if (theme === "light") {
+                body.classList.add('light');
+                navbar.classList.add('light');
+                container.classList.add('light');
+                document.getElementById("themeStatus").innerText = "Light Theme Applied";
+            } else {
+                body.classList.remove('light');
+                navbar.classList.remove('light');
+                container.classList.remove('light');
+                document.getElementById("themeStatus").innerText = "Dark Theme Applied";
+            }
+        }
+
+
+        
+    </script>
+
+</body>
+</html>
